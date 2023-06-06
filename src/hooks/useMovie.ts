@@ -1,12 +1,19 @@
-import { useState } from 'react'
-import { IMovie } from '../types/movie'
+import { useContext } from 'react'
 import { searchMovies } from '../services/client'
 import { Alert } from 'react-native'
+import { MovieContext } from '../context/MovieContext'
 
 const useMovie = () => {
-  const [movieInfo, setMovieinfo] = useState<IMovie>()
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [inputValue, setInputValue] = useState<string>('')
+  const {
+    inputValue,
+    setInputValue,
+    isLoading,
+    setIsLoading,
+    movieInfo,
+    setMovieinfo,
+    selectMovieType,
+    setSelectMovieType,
+  } = useContext(MovieContext)
 
   const handleSearch = async () => {
     try {
@@ -25,8 +32,13 @@ const useMovie = () => {
       setIsLoading(false)
     }
   }
+
   const cleanSearch = () => {
     setMovieinfo(undefined)
+  }
+
+  const handleSelectMovieType = (param: number) => {
+    setSelectMovieType(param)
   }
 
   return {
@@ -36,6 +48,8 @@ const useMovie = () => {
     setInputValue,
     handleSearch,
     cleanSearch,
+    selectMovieType,
+    handleSelectMovieType,
   }
 }
 

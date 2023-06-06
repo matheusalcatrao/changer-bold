@@ -1,16 +1,40 @@
-import React, { createContext } from 'react'
+import React, { createContext, useState } from 'react'
+import { IMovie } from '../types/movie'
+import { MovieContextProps, MovieContextType } from '../types/context'
 
-export const MovieContext = createContext({
-  movieInfo: {},
-  setMovieinfo: Function,
-  isLoading: Boolean,
-  setIsLoading: Function,
-  inputValue: String,
+export const MovieContext = createContext<MovieContextType>({
+  movieInfo: undefined,
+  isLoading: false,
+  setMovieinfo: (object: IMovie | undefined) => {},
+  setIsLoading: (param: boolean) => {},
   setInputValue: Function,
+  inputValue: '',
+  selectMovieType: undefined,
+  setSelectMovieType: (param: number) => {},
 })
 
-const MovieProvider = ({ children }: React.ReactNode) => {
-  return <MovieContext.Provider>{children}</MovieContext.Provider>
+const MovieProvider: React.FC<MovieContextProps> = ({ children }) => {
+  const [movieInfo, setMovieinfo] = useState<IMovie>()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [inputValue, setInputValue] = useState<string>('')
+  const [selectMovieType, setSelectMovieType] = useState<number>()
+
+  return (
+    <MovieContext.Provider
+      value={{
+        movieInfo,
+        setMovieinfo,
+        isLoading,
+        setIsLoading,
+        inputValue,
+        setInputValue,
+        selectMovieType,
+        setSelectMovieType,
+      }}
+    >
+      {children}
+    </MovieContext.Provider>
+  )
 }
 
 export default MovieProvider
