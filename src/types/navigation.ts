@@ -1,4 +1,5 @@
-export interface ITabBarIcon {
+export type ITabBarIcon = {
   color: string
-  size: string
+  size: number
+  focused: boolean
 }

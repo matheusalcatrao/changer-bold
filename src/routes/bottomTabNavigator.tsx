@@ -1,11 +1,11 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { Text, BottomNavigation } from 'react-native-paper'
+import { BottomNavigation } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Home from '../pages/Home'
 import { ITabBarIcon } from '../types/navigation'
+import SettingsScreen from '../pages/Settings'
 
 const Tab = createBottomTabNavigator()
 
@@ -40,14 +40,14 @@ export default function Router() {
 
             return null
           }}
-          getLabelText={({ route }) => {
+          getLabelText={({ route }: any) => {
             const { options } = descriptors[route.key]
             const label =
               options.tabBarLabel !== undefined
                 ? options.tabBarLabel
                 : options.title !== undefined
                 ? options.title
-                : route.title
+                : route?.title
 
             return label
           }}
@@ -68,8 +68,8 @@ export default function Router() {
         name="Settings"
         component={SettingsScreen}
         options={{
-          tabBarLabel: 'Settings',
-          tabBarIcon: ({ color, size }: ITabBarIcon) => {
+          tabBarLabel: 'Configuração',
+          tabBarIcon: ({ size, color }: ITabBarIcon) => {
             return <Icon name="cog" size={size} color={color} />
           },
         }}
@@ -77,19 +77,3 @@ export default function Router() {
     </Tab.Navigator>
   )
 }
-
-function SettingsScreen() {
-  return (
-    <View style={styles.container}>
-      <Text variant="headlineMedium">Settings!</Text>
-    </View>
-  )
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-})
