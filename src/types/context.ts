@@ -1,5 +1,5 @@
 import React from 'react'
-import { IMovie } from './movie'
+import { IMovie, MovieType } from './movie'
 
 export type MovieContextType = {
   movieInfo: IMovie | undefined
@@ -8,8 +8,8 @@ export type MovieContextType = {
   setIsLoading: (text: boolean) => void
   setInputValue: (text: string) => void
   inputValue: string
-  selectMovieType: number | undefined
-  setSelectMovieType: (text: number) => void
+  selectMovieType: MovieType | undefined
+  setSelectMovieType: (text: MovieType) => void
 }
 
 export interface MovieContextProps {

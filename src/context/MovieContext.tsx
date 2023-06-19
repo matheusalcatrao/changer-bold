@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react'
-import { IMovie } from '../types/movie'
+import { IMovie, MovieType } from '../types/movie'
 import { MovieContextProps, MovieContextType } from '../types/context'
 
 export const MovieContext = createContext<MovieContextType>({
@@ -10,14 +10,14 @@ export const MovieContext = createContext<MovieContextType>({
   setInputValue: Function,
   inputValue: '',
   selectMovieType: undefined,
-  setSelectMovieType: (param: number) => {},
+  setSelectMovieType: (param: MovieType) => {},
 })
 
 const MovieProvider: React.FC<MovieContextProps> = ({ children }) => {
   const [movieInfo, setMovieinfo] = useState<IMovie>()
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [inputValue, setInputValue] = useState<string>('')
-  const [selectMovieType, setSelectMovieType] = useState<number>()
+  const [selectMovieType, setSelectMovieType] = useState<MovieType>()
 
   return (
     <MovieContext.Provider

@@ -1,14 +1,11 @@
 /* eslint-disable no-unused-vars */
-enum Type {
-  Movie = 'movie',
-  Series = 'series',
-}
+export type MovieType = 'movie' | 'series' | 'episode'
 
 export interface ISearch {
   Title: string
   Year: string
   imdbID: string
-  Type: Type
+  Type: MovieType
   Poster: string
 }
 

@@ -1,12 +1,6 @@
 import React, { useState } from 'react'
-import { View, StyleSheet } from 'react-native'
-import {
-  withTheme,
-  Banner,
-  Avatar,
-  TextInput,
-  Snackbar,
-} from 'react-native-paper'
+import { withTheme, Avatar, TextInput, Snackbar } from 'react-native-paper'
+import { Container, Banner, Body, Image } from './styles'
 
 const SettingsScreen: React.FC = () => {
   const [visible, setVisible] = useState<boolean>(true)
@@ -22,9 +16,8 @@ const SettingsScreen: React.FC = () => {
   const closeBanner = () => setVisible(false)
 
   return (
-    <View style={styles.container}>
+    <Container>
       <Banner
-        style={styles.banner}
         visible={visible}
         actions={[
           {
@@ -40,19 +33,15 @@ const SettingsScreen: React.FC = () => {
         Configure seu email para receber mais informações
       </Banner>
 
-      <View style={styles.body}>
-        <Avatar.Image
-          style={styles.image}
-          size={150}
-          source={{ uri: 'https://i.pravatar.cc/300' }}
-        />
+      <Body>
+        <Image size={150} source={{ uri: 'https://i.pravatar.cc/300' }} />
         <TextInput
           label="Email"
           value={email}
           onChangeText={setEmail}
           onSubmitEditing={handleSave}
         />
-      </View>
+      </Body>
       <Snackbar
         visible={showSnackBar}
         onDismiss={disableSnackBar}
@@ -66,28 +55,8 @@ const SettingsScreen: React.FC = () => {
       >
         Email salvo com sucesso
       </Snackbar>
-    </View>
+    </Container>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-  },
-  banner: {
-    marginTop: '15%',
-  },
-  body: {
-    flex: 1,
-    // justifyContent: 'center',
-    padding: 30,
-  },
-  image: {
-    alignSelf: 'center',
-    marginBottom: 30,
-  },
-})
 
 export default withTheme(SettingsScreen)

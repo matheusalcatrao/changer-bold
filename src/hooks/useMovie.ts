@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { searchMovies } from '../services/client'
 import { Alert } from 'react-native'
 import { MovieContext } from '../context/MovieContext'
+import { MovieType } from '../types/movie'
 
 const useMovie = () => {
   const {
@@ -15,15 +16,16 @@ const useMovie = () => {
     setSelectMovieType,
   } = useContext(MovieContext)
 
-  const handleSearch = async () => {
+  const handleSearch = async (movieType?: MovieType) => {
     try {
+      console.log('handleSearch')
       if (!inputValue) {
         Alert.alert('Ops', 'Digite o nome de algum filme!')
         return
       }
 
       setIsLoading(true)
-      const reponse = await searchMovies(inputValue)
+      const reponse = await searchMovies(inputValue, movieType)
 
       setMovieinfo(reponse)
     } catch (error) {
@@ -37,8 +39,8 @@ const useMovie = () => {
     setMovieinfo(undefined)
   }
 
-  const handleSelectMovieType = (param: number) => {
-    setSelectMovieType(param)
+  const handleSelectMovieType = (type: MovieType) => {
+    setSelectMovieType(type)
   }
 
   return {
